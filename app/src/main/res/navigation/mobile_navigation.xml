@@ -30,9 +30,4 @@
         android:name="com.example.encuentratumedianaranja.homeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/newPostFragment"
-        android:name="com.example.encuentratumedianaranja.newPostFragment"
-        android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
 </navigation>
