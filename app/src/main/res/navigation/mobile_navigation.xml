@@ -16,11 +16,6 @@
         android:label="fragment_sign_out"
         tools:layout="@layout/fragment_sign_out" />
     <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.encuentratumedianaranja.registerFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.encuentratumedianaranja.profileFragment"
         android:label="fragment_profile"
@@ -30,4 +25,9 @@
         android:name="com.example.encuentratumedianaranja.homeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/fragment_chat"
+        android:name="com.example.encuentratumedianaranja.fragment_chat"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

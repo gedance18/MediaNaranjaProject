@@ -94,13 +94,6 @@ public class signInFragmet extends Fragment {
         });
 
 
-        view.findViewById(R.id.gotoCreateAccountTextView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.registerFragment);
-            }
-        });
-
         emailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
