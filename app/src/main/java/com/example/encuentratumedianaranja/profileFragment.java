@@ -1,52 +1,44 @@
 package com.example.encuentratumedianaranja;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.jetbrains.annotations.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class profileFragment extends Fragment {
 
-    ImageView photoImageView;
-    TextView displayNameTextView, emailTextView;
+    private static final String ARG_PROFILE_IMAGE_URL = "profile_image_url";
+    private static final String ARG_NAME = "name";
+    private static final String ARG_AGE = "age";
 
-    public profileFragment() {}
+    private String profileImageUrl;
+    private String name;
+    private String age;
 
+    public static profileFragment newInstance(String profileImageUrl, String name, String age) {
+        profileFragment fragment = new profileFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PROFILE_IMAGE_URL, profileImageUrl);
+        args.putString(ARG_NAME, name);
+        args.putString(ARG_AGE, age);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            profileImageUrl = getArguments().getString(ARG_PROFILE_IMAGE_URL);
+            name = getArguments().getString(ARG_NAME);
+            age = getArguments().getString(ARG_AGE);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        photoImageView = view.findViewById(R.id.photoImageView);
-        displayNameTextView = view.findViewById(R.id.displayNameTextView);
-        emailTextView = view.findViewById(R.id.emailTextView);
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(user != null){
-            displayNameTextView.setText(user.getDisplayName());
-            emailTextView.setText(user.getEmail());
-
-            Glide.with(requireView()).load(user.getPhotoUrl()).into(photoImageView);
-        }
     }
 }
