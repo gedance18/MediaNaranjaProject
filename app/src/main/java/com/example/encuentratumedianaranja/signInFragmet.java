@@ -41,8 +41,6 @@ import org.jetbrains.annotations.Nullable;
 public class signInFragmet extends Fragment {
 
     NavController navController;
-    private EditText emailEditText, passwordEditText;
-    private Button emailSignInButton;
     private LinearLayout signInForm;
     private ProgressBar signInProgressBar;
     private FirebaseAuth mAuth;
@@ -61,10 +59,6 @@ public class signInFragmet extends Fragment {
 
         googleSignInButton = view.findViewById(R.id.googleSignInButton);
         navController = Navigation.findNavController(view);
-        emailEditText = view.findViewById(R.id.emailEditText);
-        passwordEditText = view.findViewById(R.id.passwordEditText);
-        emailSignInButton = view.findViewById(R.id.emailSignInButton);
-        signInForm = view.findViewById(R.id.signInForm);
         signInProgressBar = view.findViewById(R.id.signInProgressBar);
         mAuth = FirebaseAuth.getInstance();
 
@@ -92,33 +86,6 @@ public class signInFragmet extends Fragment {
                 accederConGoogle();
             }
         });
-
-
-        emailSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                accederConEmail();
-            }
-        });
-    }
-
-    private void accederConEmail() {
-        signInForm.setVisibility(View.GONE);
-        signInProgressBar.setVisibility(View.VISIBLE);
-
-        mAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
-                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            actualizarUI(mAuth.getCurrentUser());
-                        } else {
-                            Snackbar.make(requireView(), "Error: " + task.getException(), Snackbar.LENGTH_LONG).show();
-                        }
-                        signInForm.setVisibility(View.VISIBLE);
-                        signInProgressBar.setVisibility(View.GONE);
-                    }
-                });
     }
 
     private void actualizarUI(FirebaseUser currentUser) {
